@@ -2,6 +2,9 @@ pipeline {
     agent {
         label 'master'
     }
+    environment {
+		DOCKERHUB_CREDENTIALS=credentials('dockerhub')
+    }
     parameters {
         string(name: 'BRANCH_NAME', defaultValue: 'main', description: '')
         string(name: 'DB_IMAGE_VERSION', defaultValue: 'develop', description: '')
@@ -38,6 +41,12 @@ pipeline {
                 }
             }
         }
+         stage('login') {
+
+			steps {
+				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+			}
+		}
     }
     post {
         success {
