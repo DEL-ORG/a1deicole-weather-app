@@ -54,22 +54,22 @@ pipeline {
                 '''
             }
         }
-        stage('Build auth') {
-            steps {
-                sh '''
-            cd $WORKSPACE/code/code/auth
-            docker build -t deixdevops/weather-app-auth:${BUILD_NUMBER} .
-                '''
-            }
-        }
-        // stage('Build weather') {
+        // stage('Build auth') {
         //     steps {
         //         sh '''
-        //     cd $WORKSPACE/code/code/weather
-        //     docker build -t deixdevops/weather-app-weather:${BUILD_NUMBER} .
+        //     cd $WORKSPACE/code/code/auth
+        //     docker build -t deixdevops/weather-app-auth:${BUILD_NUMBER} .
         //         '''
         //     }
         // }
+        stage('Build weather') {
+            steps {
+                sh '''
+            cd $WORKSPACE/code/code/weather
+            docker build -t deixdevops/weather-app-weather:${BUILD_NUMBER} .
+                '''
+            }
+        }
     }
  
     post {
