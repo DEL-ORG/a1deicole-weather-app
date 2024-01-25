@@ -55,7 +55,7 @@ pipeline {
             }
         }
     }
-    }
+ 
     post {
         success {
             slackSend color: '#2EB67D',
@@ -91,3 +91,4 @@ pipeline {
             "\n Build url : ${env.BUILD_URL}"
         }   
     }
+}
