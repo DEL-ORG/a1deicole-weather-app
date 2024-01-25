@@ -42,7 +42,7 @@ pipeline {
          stage('Build auth') {
             steps {
                 sh '''
-            cd $WORKSPACE/code/a1deicole-weather-app/code/auth
+            cd $WORKSPACE/test/test/code/auth
             docker build -t deixdevops/weatherapp-auth:${BUILD_NUMBER} .
                 '''
             }
