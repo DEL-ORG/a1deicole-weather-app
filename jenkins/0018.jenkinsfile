@@ -39,6 +39,7 @@ pipeline {
                         ls -l
                         pwd
                         uname -r
+                        uptime
                     """
                 }
             }
