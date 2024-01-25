@@ -91,7 +91,7 @@ pipeline {
             "\n Job Name: ${env.JOB_NAME}" +
             "\n Build number: ${currentBuild.displayName}" +
             "\n Build Status : *FAILED*" +
-            "\n Build User : *a1Deicole*" +
+            "\n Build User : *a1Deix*" +
             "\n Action : Please check the console output to fix this job IMMEDIATELY" +
             "\n Build url : ${env.BUILD_URL}"
         }
