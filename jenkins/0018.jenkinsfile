@@ -13,8 +13,8 @@ pipeline {
                         extensions: [[$class: 'LocalBranch']],
                         submoduleCfg: [],
                         userRemoteConfigs: [[
-                        url: 'https://github.com/devopstia/a1.git',
-                        credentialsId: 'github-auth'
+                        url: 'https://github.com/DEL-ORG/a1deicole-weather-app.git',
+                        credentialsId: 'github-credentials'
                         ]]
                     ])
                 }
