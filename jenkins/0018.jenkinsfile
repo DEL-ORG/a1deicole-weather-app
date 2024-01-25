@@ -50,7 +50,7 @@ pipeline {
             steps {
                 sh '''
             cd $WORKSPACE/code/code/ui
-            docker build -t deixdevops/weatherapp-auth:${BUILD_NUMBER} .
+            docker build -t deixdevops/weather-app-ui:${BUILD_NUMBER} .
                 '''
             }
         }
