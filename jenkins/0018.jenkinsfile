@@ -38,6 +38,7 @@ pipeline {
                     sh """
                         ls -l
                         pwd
+                        uname -r
                     """
                 }
             }
