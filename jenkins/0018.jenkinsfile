@@ -49,10 +49,11 @@ pipeline {
             steps {
                 sh '''
             cd $WORKSPACE/code/code/ui
-            docker build -t deixdevops/weather-app-auth:${BUILD_NUMBER} .
+            docker build -t deixdevops/weatherapp-auth:${BUILD_NUMBER} .
                 '''
             }
         }
+    }
     }
     post {
         success {
@@ -89,5 +90,4 @@ pipeline {
             "\n Build url : ${env.BUILD_URL}"
         }   
     }
-}
 }
