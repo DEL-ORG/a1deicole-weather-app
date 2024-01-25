@@ -11,6 +11,7 @@ pipeline {
         disableConcurrentBuilds()
         timeout (time: 1, unit: 'HOUR')
         timestamps()
+    }
     parameters {
         string(name: 'BRANCH_NAME', defaultValue: 'main', description: '')
         string(name: 'DB_IMAGE_VERSION', defaultValue: 'develop', description: '')
