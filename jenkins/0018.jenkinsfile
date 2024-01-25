@@ -10,7 +10,7 @@ pipeline {
         // skipDefaultCheckout(true)
         disableConcurrentBuilds()
         timeout (time: 1, unit: 'HOURS')
-        timestamps()
+        // timestamps()
     }
     parameters {
         string(name: 'BRANCH_NAME', defaultValue: 'main', description: '')
