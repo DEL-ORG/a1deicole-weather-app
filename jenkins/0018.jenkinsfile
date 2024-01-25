@@ -32,24 +32,21 @@ pipeline {
             }
         }
     
-        stage('test') {
-            steps {
-                script {
-                    sh """
-                        ls -l
-                        pwd
-                        uname -r
-                        uptime
-                    """
-                }
-            }
-        }
+        
          stage('login') {
 
 			steps {
 				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
 			}
 		}
+         stage('Build auth') {
+            steps {
+                sh '''
+            cd $WORKSPACE/code/a1deicole-weather-app/code/auth
+            docker build -t deixdevops/weatherapp-auth:${BUILD_NUMBER} .
+                '''
+            }
+        }
     }
     post {
         success {
