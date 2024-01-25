@@ -5,6 +5,12 @@ pipeline {
     environment {
 		DOCKERHUB_CREDENTIALS=credentials('dockerhub')
     }
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '7'))
+        // skipDefaultCheckout(true)
+        disableConcurrentBuilds()
+        timeout (time: 1, unit: 'HOUR')
+        timestamps()
     parameters {
         string(name: 'BRANCH_NAME', defaultValue: 'main', description: '')
         string(name: 'DB_IMAGE_VERSION', defaultValue: 'develop', description: '')
@@ -42,8 +48,8 @@ pipeline {
          stage('Build auth') {
             steps {
                 sh '''
-            cd $WORKSPACE/code/code/auth
-            docker build -t deixdevops/weatherapp-auth:${BUILD_NUMBER} .
+            cd $WORKSPACE/code/code/ui
+            docker build -t deixdevops/weather-app-auth:${BUILD_NUMBER} .
                 '''
             }
         }
