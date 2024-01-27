@@ -4,6 +4,7 @@ pipeline {
     }
     environment {
 		DOCKERHUB_CREDENTIALS=credentials('dockerhub')
+        DOCKER_HUB_REGISTRY = "${env.DOCKER_HUB_REGISTRY}"
     }
     options {
         buildDiscarder(logRotator(numToKeepStr: '7'))
@@ -34,7 +35,7 @@ pipeline {
                         url: 'https://github.com/DEL-ORG/a1deicole-weather-app.git',
                         credentialsId: 'github-credentials'
                         ]]
-                    ])
+                    ])        
                 }
             }
         }
@@ -50,7 +51,7 @@ pipeline {
             steps {
                 sh '''
             cd $WORKSPACE/code/code/ui
-            docker build -t deixdevops/weather-app-ui:${BUILD_NUMBER} .
+            docker build -t ${env.DOCKER_HUB_REGISTRY}/weather-app-ui:${BUILD_NUMBER} .
                 '''
             }
         }
@@ -58,7 +59,7 @@ pipeline {
             steps {
                 sh '''
             cd $WORKSPACE/code/code/auth
-            docker build -t deixdevops/weather-app-auth:${BUILD_NUMBER} .
+            docker build -t ${env.DOCKER_HUB_REGISTRY}/weather-app-auth:${BUILD_NUMBER} .
                 '''
             }
         }
@@ -66,7 +67,7 @@ pipeline {
         //     steps {
         //         sh '''
         //     cd $WORKSPACE/code/code/weather
-        //     docker build -t deixdevops/weather-app-weather:${BUILD_NUMBER} .
+        //     docker build -t ${env.DOCKER_HUB_REGISTRY}/weather-app-weather:${BUILD_NUMBER} .
         //         '''
         //     }
         // }
