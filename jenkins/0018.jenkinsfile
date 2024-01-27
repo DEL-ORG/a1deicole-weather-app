@@ -67,7 +67,7 @@ pipeline {
         //     steps {
         //         sh '''
         //     cd $WORKSPACE/code/code/weather
-        //     docker build -t ${env.DOCKER_HUB_REGISTRY}/weather-app-weather:${BUILD_NUMBER} .
+        //     docker build -t deixdevops/weather-app-weather:${BUILD_NUMBER} .
         //         '''
         //     }
         // }
