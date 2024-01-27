@@ -4,7 +4,7 @@ pipeline {
     }
     environment {
 		DOCKERHUB_CREDENTIALS=credentials('dockerhub')
-        DOCKER_HUB_REGISTRY = "deixdevops"
+        
     }
     options {
         buildDiscarder(logRotator(numToKeepStr: '7'))
@@ -51,7 +51,7 @@ pipeline {
             steps {
                 sh '''
             cd $WORKSPACE/code/code/ui
-            docker build -t ${env.DOCKER_HUB_REGISTRY}/weather-app-ui:${BUILD_NUMBER} .
+            docker build -t deixdevops/weather-app-ui:${BUILD_NUMBER} .
                 '''
             }
         }
@@ -59,7 +59,7 @@ pipeline {
             steps {
                 sh '''
             cd $WORKSPACE/code/code/auth
-            docker build -t ${env.DOCKER_HUB_REGISTRY}/weather-app-auth:${BUILD_NUMBER} .
+            docker build -t deixdevops/weather-app-auth:${BUILD_NUMBER} .
                 '''
             }
         }
