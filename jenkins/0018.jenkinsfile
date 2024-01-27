@@ -4,7 +4,7 @@ pipeline {
     }
     environment {
 		DOCKERHUB_CREDENTIALS=credentials('dockerhub')
-        DOCKER_HUB_REGISTRY = "${env.DOCKER_HUB_REGISTRY}"
+        DOCKER_HUB_REGISTRY = "deixdevops"
     }
     options {
         buildDiscarder(logRotator(numToKeepStr: '7'))
