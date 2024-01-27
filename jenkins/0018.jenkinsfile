@@ -78,7 +78,7 @@ pipeline {
             slackSend color: '#2EB67D',
             channel: 'learning', 
             message: "*Weather-app Project Build Status. Good job*" +
-            "\n Project Name: Weather-app" +
+            "\n Project Name: Weatherapp" +
             "\n Job Name: ${env.JOB_NAME}" +
             "\n Build number: ${currentBuild.displayName}" +
             "\n Build Status : *SUCCESS*" +
