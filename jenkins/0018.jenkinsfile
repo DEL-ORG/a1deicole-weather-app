@@ -119,7 +119,7 @@ pipeline {
         }   
     }
 }
-    }
+    
 
 def sanity_check() {
     if (params.BRANCH_NAME.isEmpty()){
