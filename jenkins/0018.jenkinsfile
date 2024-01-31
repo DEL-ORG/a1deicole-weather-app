@@ -2,26 +2,35 @@ pipeline {
     agent {
         label 'master'
     }
-    environment {
-		DOCKERHUB_CREDENTIALS=credentials('dockerhub')
-        
+    triggers {
+        githubPush()
     }
+    // environment {
+	// 	DOCKERHUB_CREDENTIALS=credentials('dockerhub')
+        
+    // }
     options {
         buildDiscarder(logRotator(numToKeepStr: '7'))
-        // skipDefaultCheckout(true)
+        skipDefaultCheckout(true)
         disableConcurrentBuilds()
         timeout (time: 1, unit: 'HOURS')
-        // timestamps()
+        timestamps()
     }
     parameters {
         string(name: 'BRANCH_NAME', defaultValue: 'main', description: '')
-        string(name: 'DB_IMAGE_VERSION', defaultValue: 'develop', description: '')
-        string(name: 'REDIS_IMAGE_VERSION', defaultValue: 'develop', description: '')
-        string(name: 'UI_IMAGE_VERSION', defaultValue: 'develop', description: '')
-        string(name: 'WEATHER_IMAGE_VERSION', defaultValue: 'develop', description: '')
-        string(name: 'AUTH_IMAGE_VERSION', defaultValue: 'develop', description: '')
+        string (name: 'UI_IMAGE_TAG', defaultValue: 'latest', description: '')
+        string (name: 'AUTH_IMAGE_TAG', defaultValue: 'latest', description: '')
+        string (name: 'WEATHER_IMAGE_TAG', defaultValue: 'latest', description: '')
+        string (name: 'REDIS_IMAGE_TAG', defaultValue: 'latest', description: '')
+        string (name: 'DB_IMAGE_TAG', defaultValue: 'latest', description: '')
     }
     stages {
+        stage('Sanity Check') {
+            steps {
+                script{
+                   sanity_check() 
+                }
+            }
         stage ('Checkout') {
             steps {
                 dir("${WORKSPACE}/code") {
@@ -41,37 +50,37 @@ pipeline {
         }
     
         
-         stage('login') {
+    //      stage('login') {
 
-			steps {
-				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-			}
-		}
-         stage('Build ui') {
-            steps {
-                sh '''
-            cd $WORKSPACE/code/code/ui
-            docker build -t deixdevops/weather-app-ui:${BUILD_NUMBER} .
-                '''
-            }
-        }
-        // stage('Build auth') {
-        //     steps {
-        //         sh '''
-        //     cd $WORKSPACE/code/code/auth
-        //     docker build -t deixdevops/weather-app-auth:${BUILD_NUMBER} .
-        //         '''
-        //     }
-        // }
-        // stage('Build weather') {
-        //     steps {
-        //         sh '''
-        //     cd $WORKSPACE/code/code/weather
-        //     docker build -t deixdevops/weather-app-weather:${BUILD_NUMBER} .
-        //         '''
-        //     }
-        // }
-    }
+	// 		steps {
+	// 			sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+	// 		}
+	// 	}
+    //      stage('Build ui') {
+    //         steps {
+    //             sh '''
+    //         cd $WORKSPACE/code/code/ui
+    //         docker build -t deixdevops/weather-app-ui:${BUILD_NUMBER} .
+    //             '''
+    //         }
+    //     }
+    //     // stage('Build auth') {
+    //     //     steps {
+    //     //         sh '''
+    //     //     cd $WORKSPACE/code/code/auth
+    //     //     docker build -t deixdevops/weather-app-auth:${BUILD_NUMBER} .
+    //     //         '''
+    //     //     }
+    //     // }
+    //     // stage('Build weather') {
+    //     //     steps {
+    //     //         sh '''
+    //     //     cd $WORKSPACE/code/code/weather
+    //     //     docker build -t deixdevops/weather-app-weather:${BUILD_NUMBER} .
+    //     //         '''
+    //     //     }
+    //     // }
+    // }
  
     post {
         success {
@@ -108,4 +117,10 @@ pipeline {
             "\n Build url : ${env.BUILD_URL}"
         }   
     }
+}
+def sanity_check() {
+    if (params.BRANCH_NAME.isEmpty()){
+       echo "The parameter BRANCH_NAME is not set"
+       sh 'exit 2'
+   } 
 }
