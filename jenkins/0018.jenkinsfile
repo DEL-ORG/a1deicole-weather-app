@@ -2,9 +2,9 @@ pipeline {
     agent {
         label 'master'
     }
-    triggers {
-        githubPush()
-    }
+    // triggers {
+    //     githubPush()
+    // }
     // environment {
 	// 	DOCKERHUB_CREDENTIALS=credentials('dockerhub')
         
@@ -125,3 +125,4 @@ pipeline {
    } 
 }
     }
+}
