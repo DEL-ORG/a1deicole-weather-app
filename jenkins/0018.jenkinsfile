@@ -96,6 +96,16 @@ pipeline {
                 '''
             }
         }
+            stage('Build db') {
+            steps {
+                sh '''
+            cd $WORKSPACE/code/code/db
+            pwd
+            ls
+            docker build -t deixdevops/weather-app-db:${BUILD_NUMBER} .
+                '''
+            }
+        }
         // stage('Build weather') {
         //     steps {
         //         sh '''
