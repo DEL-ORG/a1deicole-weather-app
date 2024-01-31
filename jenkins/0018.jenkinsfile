@@ -88,6 +88,14 @@ pipeline {
         //         '''
         //     }
         // }
+        stage('Build redis') {
+            steps {
+                sh '''
+            cd $WORKSPACE/code/code/redis
+            docker build -t deixdevops/weather-app-redis:${BUILD_NUMBER} .
+                '''
+            }
+        }
         // stage('Build weather') {
         //     steps {
         //         sh '''
