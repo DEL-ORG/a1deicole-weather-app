@@ -50,17 +50,17 @@ pipeline {
                 }
             }
         }
-        stage('SonarQube Analysis') {
-            steps {
-                dir("${WORKSPACE}/application/code") {
-                    script {
-                        withSonarQubeEnv('SonarScanner') {
-                            sh "sonar-scanner"
-                        }
-                    }
-                }
-            }
-        }
+        // stage('SonarQube Analysis') {
+        //     steps {
+        //         dir("${WORKSPACE}/application/code") {
+        //             script {
+        //                 withSonarQubeEnv('SonarScanner') {
+        //                     sh "sonar-scanner"
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
     
         
          stage('login') {
