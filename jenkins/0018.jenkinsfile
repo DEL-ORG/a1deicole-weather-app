@@ -24,6 +24,7 @@ pipeline {
         string (name: 'WEATHER_IMAGE_TAG', defaultValue: 'latest', description: '')
         string (name: 'REDIS_IMAGE_TAG', defaultValue: 'latest', description: '')
         string (name: 'DB_IMAGE_TAG', defaultValue: 'latest', description: '')
+        string(name: 'SONAR_VERSION', defaultValue: '5.0.1.3006', description: '')
     }
     stages {
         stage('Sanity Check') {
@@ -72,6 +73,7 @@ pipeline {
          stage('Build ui') {
             steps {
                 sh '''
+            pwd
             cd $WORKSPACE/code/code/ui
             ls
             docker build -t deixdevops/weather-app-ui:${BUILD_NUMBER} .
