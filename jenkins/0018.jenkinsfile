@@ -62,6 +62,7 @@ pipeline {
             steps {
                 sh '''
             cd $WORKSPACE/code/code/ui
+            ls
             docker build -t deixdevops/weather-app-ui:${BUILD_NUMBER} .
                 '''
             }
