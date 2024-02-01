@@ -82,7 +82,7 @@ pipeline {
             pwd
             cd $WORKSPACE/code/code/ui
             ls
-            docker build -t deixdevops/weather-app-ui:${BUILD_NUMBER} .
+            docker build -t $(DOCKER_HUB_REGISTRY)/weather-app-ui:$(AUTH_IMAGE_TAG) .
                 '''
             }
         }
