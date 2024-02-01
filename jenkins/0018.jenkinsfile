@@ -117,7 +117,7 @@ pipeline {
                 sh '''
             cd $WORKSPACE/code/code/weather
             docker images |grep -i "deixdevops/rain-weather"
-            // docker build -t deixdevops/weather-app-weather:${BUILD_NUMBER} .
+            docker build -t deixdevops/weather-app-weather:${BUILD_NUMBER} .
                 '''
             }
         }
