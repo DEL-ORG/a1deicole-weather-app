@@ -63,7 +63,13 @@ pipeline {
         //     }
         // }
     
-        
+        stage('check terraform') {
+            steps {
+                sh '''
+            terraform -v
+                '''
+            }
+        }
          stage('login') {
 
 			steps {
