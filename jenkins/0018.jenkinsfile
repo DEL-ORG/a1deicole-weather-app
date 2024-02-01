@@ -76,14 +76,11 @@ pipeline {
 				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
 			}
 		}
-         stage('Build ui') {
+        stage('Build ui') {
             steps {
                 sh '''
-            pwd
             cd $WORKSPACE/code/code/ui
-            ls
             docker build -t deixdevops/weather-app-ui:${BUILD_NUMBER} .
-            
                 '''
             }
         }
