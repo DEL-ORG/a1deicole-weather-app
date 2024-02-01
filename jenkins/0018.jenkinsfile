@@ -76,11 +76,12 @@ pipeline {
 				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
 			}
 		}
-        stage('Build ui') {
+        stage('Build ui and push to dockerhub') {
             steps {
                 sh '''
             cd $WORKSPACE/code/code/ui
             docker build -t deixdevops/weather-app-ui:${BUILD_NUMBER} .
+            docker push deixdevops/weather-app-ui:${BUILD_NUMBER}
                 '''
             }
         }
@@ -90,34 +91,38 @@ pipeline {
             cd $WORKSPACE/code/code/auth
             docker images| grep -i "deixdevops/rain-auth"
             docker tag deixdevops/rain-auth:dev deixdevops/weather-auth:latest
+            docker push deixdevops/weather-auth:latest
             
                 '''
             }
         }
-        stage('Build redis') {
+        stage('Build and push redis') {
             steps {
                 sh '''
             cd $WORKSPACE/code/code/redis
             docker build -t deixdevops/weather-app-redis:${BUILD_NUMBER} .
+            docker push deixdevops/weather-app-redis:${BUILD_NUMBER}
                 '''
             }
         }
-            stage('Build db') {
+            stage('Build and push db') {
             steps {
                 sh '''
             cd $WORKSPACE/code/code/db
             pwd
             ls
             docker build -t deixdevops/weather-app-db:${BUILD_NUMBER} .
+            docker push deixdevops/weather-app-db:${BUILD_NUMBER}
                 '''
             }
         }
-        stage('Build weather') {
+        stage('Build and push weather') {
             steps {
                 sh '''
             cd $WORKSPACE/code/code/weather
             docker images |grep -i "deixdevops/rain-weather"
             docker tag deixdevops/rain-weather:dev deixdevops/weather-weather:latest
+            docker push deixdevops/weather-weather:latest
            
                 '''
             }
