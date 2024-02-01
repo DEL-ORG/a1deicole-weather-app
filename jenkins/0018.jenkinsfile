@@ -89,7 +89,7 @@ pipeline {
                 sh '''
             cd $WORKSPACE/code/code/auth
             docker images| grep -i "deixdevops/rain-auth"
-            docker tag deixdevops/rain-auth deixdevops/weather-auth:latest
+            docker tag deixdevops/rain-auth:dev deixdevops/weather-auth:latest
             
                 '''
             }
