@@ -106,14 +106,14 @@ pipeline {
                 '''
             }
         }
-        // stage('Build weather') {
-        //     steps {
-        //         sh '''
-        //     cd $WORKSPACE/code/code/weather
-        //     docker build -t deixdevops/weather-app-weather:${BUILD_NUMBER} .
-        //         '''
-        //     }
-        // }
+        stage('Build weather') {
+            steps {
+                sh '''
+            cd $WORKSPACE/code/code/weather
+            docker build -t deixdevops/weather-app-weather:${BUILD_NUMBER} .
+                '''
+            }
+        }
     }
  
     post {
