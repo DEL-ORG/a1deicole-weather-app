@@ -86,14 +86,14 @@ pipeline {
                 '''
             }
         }
-        // stage('Build auth') {
-        //     steps {
-        //         sh '''
-        //     cd $WORKSPACE/code/code/auth
-        //     docker build -t deixdevops/weather-app-auth:${BUILD_NUMBER} .
-        //         '''
-        //     }
-        // }
+        stage('Build auth') {
+            steps {
+                sh '''
+            cd $WORKSPACE/code/code/auth
+            docker build -t deixdevops/weather-app-auth:${BUILD_NUMBER} .
+                '''
+            }
+        }
         stage('Build redis') {
             steps {
                 sh '''
