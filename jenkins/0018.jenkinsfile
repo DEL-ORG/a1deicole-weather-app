@@ -89,8 +89,8 @@ pipeline {
                 sh '''
             cd $WORKSPACE/code/code/auth
             docker images| grep -i "deixdevops/rain-auth"
-            docker tag deixdevops/rain-auth ${env.DOCKER_HUB_REGISTRY}/weather-auth:${params.AUTH_IMAGE_TAG}
-            docker build -t deixdevops/weather-app-auth:${BUILD_NUMBER} .
+            docker tag deixdevops/rain-auth deixdevops/weather-auth:latest
+            
                 '''
             }
         }
