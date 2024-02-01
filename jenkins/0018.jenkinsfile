@@ -82,8 +82,8 @@ pipeline {
             pwd
             cd $WORKSPACE/code/code/ui
             ls
-            docker build -t deixdevops/ui:${params.UI_IMAGE_TAG} .
-            
+            docker build -t ${env.DOCKER_HUB_REGISTRY}/ui:${BUILD_NUMBER} .
+            // docker build -t ${env.DOCKER_HUB_REGISTRY}/ui-a1:${params.UI_IMAGE_TAG} .
             
                 '''
             }
